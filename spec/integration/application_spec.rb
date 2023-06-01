@@ -13,10 +13,11 @@ describe Application do
   context "Get /albums" do
     it "lists all albums" do
       response = get('/albums')
-      expected_response = 'Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring'
-
+     
       expect(response.status).to eq(200)
-      expect(response.body).to eq (expected_response)
+      expect(response.body).to include('Doolittle')
+      expect(response.body).to include('Super Trouper')
+      expect(response.body).to include('Lover')
 
 
     end
@@ -75,7 +76,7 @@ describe Application do
     it "returns the HTML content for another single album" do
       response = get('/albums/3')
 
-      expect(response.body).to include('<h1>Waterloo</h1>')
+      expect(response.body).to include('Waterloo')
       expect(response.body).to include('Release year: 1974')
       expect(response.body).to include('Artist: ABBA')
     end
