@@ -23,10 +23,10 @@ describe Application do
   
   end
 
-  context "POST /album" do
+  context "POST /albums" do
     it 'creates a new album' do
 
-      response = post('/album', title: 'Voyage', release_year: '2022', artist_id: '2')
+      response = post('/albums', title: 'Voyage', release_year: '2022', artist_id: '2')
 
       expect(response.status).to eq(200)
       expect(response.body).to eq('')
@@ -34,6 +34,30 @@ describe Application do
       get_response = get('/albums')
 
       expect(get_response.body).to include('Voyage')
+    end
+  end
+
+  context "GET /artists" do
+    it 'returns a list of all artists' do
+
+      response = get('/artists')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to eq('Pixies, ABBA, Taylor Swift, Nina Simone')
+    end
+  end
+
+  context "POST /artists" do
+    it 'creates a new artist' do
+
+      response = post('/artists', name: 'Wild nothing', genre: 'Indie')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to eq('')
+
+      get_response = get('/artists')
+
+      expect(get_response.body).to include('Wild nothing')
     end
   end
 
