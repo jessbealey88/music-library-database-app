@@ -61,4 +61,24 @@ describe Application do
     end
   end
 
+  context "GET /albums/:id" do
+    it "returns the HTML content for a single album" do
+      response = get('/albums/1')
+
+      expect(response.body).to include('<h1>Doolittle</h1>')
+      expect(response.body).to include('Release year: 1989')
+      expect(response.body).to include('Artist: Pixies') 
+      
+
+    end
+
+    it "returns the HTML content for another single album" do
+      response = get('/albums/3')
+
+      expect(response.body).to include('<h1>Waterloo</h1>')
+      expect(response.body).to include('Release year: 1974')
+      expect(response.body).to include('Artist: ABBA')
+    end
+  end
+
 end
