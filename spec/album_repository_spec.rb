@@ -32,7 +32,7 @@ describe AlbumRepository do
     expect(album.artist_id).to eq(2)
   end
 
-  xit 'creates an album' do
+  it 'creates an album' do
     repo = AlbumRepository.new
 
     new_album = Album.new
@@ -48,7 +48,7 @@ describe AlbumRepository do
     expect(albums.last.artist_id).to eq(1)
   end
 
-  xit 'deletes an album' do
+  it 'deletes an album' do
     repo = AlbumRepository.new
 
     repo.delete(1)
