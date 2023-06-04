@@ -62,7 +62,8 @@ describe Application do
       response = get('/artists')
 
       expect(response.status).to eq(200)
-      expect(response.body).to eq('Pixies, ABBA, Taylor Swift, Nina Simone')
+      expect(response.body).to include('<a href="/artists/1">Pixies</a>')
+      expect(response.body).to include('<a href="/artists/3">Taylor Swift</a>')
     end
   end
 
@@ -99,5 +100,23 @@ describe Application do
       expect(response.body).to include('Artist: ABBA')
     end
   end
+
+  context "GET /artists/:id" do
+    it "returns the HTML content for a single artist" do
+      response = get('/artists/1')
+
+      expect(response.body).to include('<h1>Pixies</h1>')
+      expect(response.body).to include('genre: Rock')
+     
+    end
+
+    it "returns the HTML content for another single artist" do
+      response = get('/artists/3')
+
+      expect(response.body).to include('<h1>Taylor Swift</h1>')
+      expect(response.body).to include('genre: Pop')
+    end
+  end
+
 
 end
